@@ -36,11 +36,12 @@ namespace SharpScss
         private static extern IntPtr LoadLibrary([MarshalAs(UnmanagedType.LPStr)]string lpFileName);
 
         // libsass\include\sass\base.h (4 hits)
-        [DllImport(LibSassDll, CallingConvention = CallingConvention.Cdecl)]public static extern IntPtr sass_string_alloc(IntPtr size);
+        [DllImport(LibSassDll, CallingConvention = CallingConvention.Cdecl)]public static extern IntPtr sass_alloc_memory(IntPtr size);
         [DllImport(LibSassDll, CallingConvention = CallingConvention.Cdecl)]public static extern StringUtf8 sass_string_quote(StringUtf8 str, char quote_mark);
         [DllImport(LibSassDll, CallingConvention = CallingConvention.Cdecl)]public static extern StringUtf8 sass_string_unquote(StringUtf8 str);
         [DllImport(LibSassDll, CallingConvention = CallingConvention.Cdecl)]public static extern StringUtf8 sass_resolve_file(StringUtf8 path, StringUtf8* incs);       
         [DllImport(LibSassDll, CallingConvention = CallingConvention.Cdecl)]public static extern StringUtf8 libsass_version();
+        [DllImport(LibSassDll, CallingConvention = CallingConvention.Cdecl)]public static extern StringUtf8 libsass_language_version();
 
         // libsass\include\sass\context.h (82 hits)
         [DllImport(LibSassDll, CallingConvention = CallingConvention.Cdecl)]public static extern Sass_Options sass_make_options();
@@ -440,14 +441,14 @@ namespace SharpScss
 
 #if SUPPORT_UTF8_GETBYTES_UNSAFE
                 var length = Encoding.UTF8.GetByteCount(text);
-                var pointer = sass_string_alloc(new IntPtr(length));
+                var pointer = sass_alloc_memory(new IntPtr(length));
                 fixed (char* pText = text)
                     Encoding.UTF8.GetBytes(pText, text.Length, (byte*) pointer, length);
 #else
 
                 var buffer = Encoding.UTF8.GetBytes(text);
                 var length = buffer.Length;
-                var pointer = sass_string_alloc(new IntPtr(length));
+                var pointer = sass_alloc_memory(new IntPtr(length));
                 Marshal.Copy(buffer, 0, pointer, length);
 #endif
                 ((byte*)pointer)[length] = 0;

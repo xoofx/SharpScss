@@ -18,6 +18,7 @@ namespace SharpScss
         private static readonly LibSass.sass_importer_delegate ScssImporterLock;
         private static readonly IntPtr ScssImporterPtr;
         private static string version;
+        private static string languageVersion;
         private static readonly ScssOptions DefaultOptions = new ScssOptions();
         
         static Scss()
@@ -33,6 +34,14 @@ namespace SharpScss
         public static string Version
         {
             get { return version = version ?? LibSass.libsass_version(); }
+        }
+
+        /// <summary>
+        /// Gets the libsass language version.
+        /// </summary>
+        public static string LanguageVersion
+        {
+            get { return languageVersion = languageVersion ?? LibSass.libsass_language_version(); }
         }
 
         /// <summary>

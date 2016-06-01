@@ -1,73 +1,70 @@
 ﻿{
   "title": "SharpScss",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "authors": [ "Alexandre Mutel" ],
-  "owners": [ "Alexandre Mutel" ],
-  "licenseUrl": "https://github.com/xoofx/SharpScss/blob/master/license.txt",
-  "projectUrl": "https://github.com/xoofx/SharpScss",
-  "requireLicenseAcceptance": false,
-  "description": "A P/Invoke .NET wrapper around libsass to convert SCSS to CSS supporting NET2.0/NET3.5/NET4.x+ and CoreCLR platform",
   "copyright": "Alexandre Mutel",
-  "tags": [ "libsass", "SCSS", "SASS", "CSS" ],
+  "description": "A P/Invoke .NET wrapper around libsass to convert SCSS to CSS supporting NET2.0/NET3.5/NET4.x+ and CoreCLR platform",
   "language": "en-US",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/xoofx/SharpScss"
+  "packOptions": {
+    "owners": [ "Alexandre Mutel" ],
+    "projectUrl": "https://github.com/xoofx/SharpScss",
+    "licenseUrl": "https://github.com/xoofx/SharpScss/blob/master/license.txt",
+    "requireLicenseAcceptance": false,
+    "tags": [ "libsass", "SCSS", "SASS", "CSS" ],
+    "releaseNotes": "Project upgrade to donet rc2, add support for netstandard1.3",
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/xoofx/SharpScss"
+    },
+    "files": {
+      "mappings": {
+        "runtimes/win7-x64/native/": "runtimes/win7-x64/native/*",
+        "runtimes/win7-x86/native/": "runtimes/win7-x86/native/*",
+        "build/": "build/*"
+      }
+    }
   },
   "configurations": {
     "Debug": {
-      "compilationOptions": {
-        "define": [ "DEBUG", "TRACE" ],
-        "allowUnsafe": true
+      "buildOptions": {
+        "define": [ "DEBUG", "TRACE" ]
       }
     },
     "Release": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [ "RELEASE", "TRACE" ],
         "optimize": true,
-        "allowUnsafe": true,
         "xmlDoc": true,
         "keyFile": "key.snk",
         "strongName": true
       }
     }
   },
-  "packInclude": {
-    "runtimes/": "runtimes/**",
-    "runtimes/win/native/": "runtimes/win-x86/native/**",
-    "build/": "build/**"
+  "buildOptions": {
+    "allowUnsafe": true
   },
   "frameworks": {
     "net20": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [ "SUPPORT_UTF8_GETBYTES_UNSAFE" ]
       }
     },
     "net35": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [ "SUPPORT_UTF8_GETBYTES_UNSAFE" ]
       }
     },
     "net40": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [ "SUPPORT_UTF8_GETBYTES_UNSAFE" ]
       }
     },
-    "dotnet5.4": {
-      "compilationOptions": {
+    "netstandard1.3": {
+      "buildOptions": {
         "define": [ "CORE", "SUPPORT_UTF8_GETBYTES_UNSAFE", "SUPPORT_UTF8_GETSTRING_UNSAFE" ]
       },
       "dependencies": {
-        "Microsoft.NETCore": "5.0.1-beta-23516",
-        "Microsoft.NETCore.Platforms": "1.0.1-beta-23516",
-        "System.Runtime.Extensions": "4.0.11-beta-23516",
-        "System.Reflection": "4.1.0-beta-23516",
-        "System.Collections": "4.0.11-beta-23516",
-        "System.Linq": "4.0.1-beta-23516",
-        "System.Threading": "4.0.11-beta-23516",
-        "System.Runtime": "4.0.21-beta-23516",
-        "Microsoft.CSharp": "4.0.1-beta-23516",
-        "System.Globalization.Extensions": "4.0.1-beta-23516"
+        "NETStandard.Library": "1.5.0-rc2-24027"
       }
     }
   }

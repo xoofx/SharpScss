@@ -1,0 +1,4 @@
+[submodule "libsass"]
+	path = libsass
+	url = https://github.com/xoofx/libsass.git
+	branch = develop
