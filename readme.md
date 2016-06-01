@@ -1,4 +1,4 @@
-# SharpScss [![Windows CI](https://ci.appveyor.com/api/projects/status/github/xoofx/sharpscss?svg=true)](https://ci.appveyor.com/project/xoofx/sharpscss/branch/master)
+# SharpScss [![Build status](https://ci.appveyor.com/api/projects/status/github/xoofx/sharpscss?svg=true)](https://ci.appveyor.com/project/xoofx/sharpscss/branch/master)  [![NuGet](https://img.shields.io/nuget/v/SharpScss.svg)](https://www.nuget.org/packages/SharpScss/)
 
 SharpScss is a P/Invoke .NET wrapper around [libsass](https://github.com/sass/libsass) to convert SCSS to CSS supporting NET2.0/NET3.5/NET4.x+ and CoreCLR platform
 
@@ -9,12 +9,12 @@ SharpScss is a P/Invoke .NET wrapper around [libsass](https://github.com/sass/li
 - Supports include paths
 - Supports for source maps
 - Supports for `libsass` user custom importer callback in `ScssOptions.TryImport`
-- Supports for .NET2.0, .NET3.5, .NET4.x+ and CoreCLR (dotnet5.4 profile)
+- Supports for .NET2.0, .NET3.5, .NET4.x+ and CoreCLR (netstandard1.3 from dotnet rc2)
 - Supports Windows x86 and x64 (requires C++ VS2013 runtime installed)
 
 ## Download
 
-SharpScss is available as a [NuGet](https://nuget.org) package.
+SharpScss is available on [![NuGet](https://img.shields.io/nuget/v/SharpScss.svg)](https://www.nuget.org/packages/SharpScss/)
 
 ## Usage
 
@@ -68,10 +68,7 @@ var result = Scss.ConvertToCss(@"@import ""foo"";", new ScssOptions()
 
 Currently, the compiled version of libsass shipped with SharpScss is a custom build from the fork [xoofx/libsass](https://github.com/xoofx/libsass/tree/develop) branch [develop](https://github.com/xoofx/libsass/tree/develop).
 
-This fork is fixing two issues reported to [libsass](https://github.com/sass/libsass):
-
-- [#1973](https://github.com/sass/libsass/pull/1973): Add sass_string_alloc public API function to allow to allocate a string owned by libsass
-- [#1974](https://github.com/sass/libsass/pull/1974): Fix sass_option_push_include_path / sass_option_push_plugin_path  
+This fork is mainly allowing to compile libsass with VS2013 C/C++ Runtime.
 
 ## TODO Tasks
 
