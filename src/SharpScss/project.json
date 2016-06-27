@@ -1,6 +1,6 @@
 ﻿{
   "title": "SharpScss",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "authors": [ "Alexandre Mutel" ],
   "copyright": "Alexandre Mutel",
   "description": "A P/Invoke .NET wrapper around libsass to convert SCSS to CSS supporting NET2.0/NET3.5/NET4.x+ and CoreCLR platform",
@@ -11,7 +11,7 @@
     "licenseUrl": "https://github.com/xoofx/SharpScss/blob/master/license.txt",
     "requireLicenseAcceptance": false,
     "tags": [ "libsass", "SCSS", "SASS", "CSS" ],
-    "releaseNotes": "Project upgrade to donet rc2, add support for netstandard1.3",
+    "releaseNotes": "Upgrade to donet Core RTM, 8sing NETStandard.Library 1.6.0",
     "repository": {
       "type": "git",
       "url": "git://github.com/xoofx/SharpScss"
@@ -64,7 +64,7 @@
         "define": [ "CORE", "SUPPORT_UTF8_GETBYTES_UNSAFE", "SUPPORT_UTF8_GETSTRING_UNSAFE" ]
       },
       "dependencies": {
-        "NETStandard.Library": "1.5.0-rc2-24027"
+        "NETStandard.Library": "1.6.0"
       }
     }
   }
