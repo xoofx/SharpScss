@@ -12,7 +12,7 @@ Based on the version of `libsass 3.4.4`
 - Supports for source maps
 - Supports for `libsass` user custom importer callback in `ScssOptions.TryImport`
 - Supports for .NET2.0, .NET3.5, .NET4.x+ and CoreCLR (netstandard1.3 from dotnet)
-- Supports Windows x86 and x64 and Ubuntu 14.04-x64 
+- Supports `Windows x86`, `Windows x64`, `Ubuntu 14.04-x64` and `OSX`
 
 ## Download
 
