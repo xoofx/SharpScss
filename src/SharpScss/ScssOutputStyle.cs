@@ -11,21 +11,31 @@ namespace SharpScss
         /// <summary>
         /// Nested format.
         /// </summary>
-        Nested,
+        Nested = 0,
 
         /// <summary>
         /// Expanded format.
         /// </summary>
-        Expanded,
+        Expanded = 1,
 
         /// <summary>
         /// Compact format.
         /// </summary>
-        Compact,
+        Compact = 2,
 
         /// <summary>
         /// Compressed format.
         /// </summary>
-        Compressed,
+        Compressed = 3,
+
+        /// <summary>
+        /// TODO: No documentation.
+        /// </summary>
+        Inspect = 4,
+
+        /// <summary>
+        /// TODO: No documentation.
+        /// </summary>
+        Sass = 5
     }
 }

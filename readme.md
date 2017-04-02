@@ -2,6 +2,8 @@
 
 SharpScss is a P/Invoke .NET wrapper around [libsass](https://github.com/sass/libsass) to convert SCSS to CSS supporting NET2.0/NET3.5/NET4.x+ and CoreCLR platform
 
+Based on the version of `libsass 3.4.4`
+
 ## Features
 
 - Pure P/Invoke .NET wrapper, no C++/CLI involved
@@ -9,8 +11,8 @@ SharpScss is a P/Invoke .NET wrapper around [libsass](https://github.com/sass/li
 - Supports include paths
 - Supports for source maps
 - Supports for `libsass` user custom importer callback in `ScssOptions.TryImport`
-- Supports for .NET2.0, .NET3.5, .NET4.x+ and CoreCLR (netstandard1.3 from dotnet rc2)
-- Supports Windows x86 and x64 (requires C++ VS2013 runtime installed)
+- Supports for .NET2.0, .NET3.5, .NET4.x+ and CoreCLR (netstandard1.3 from dotnet)
+- Supports Windows x86 and x64 and Ubuntu 14.04-x64 
 
 ## Download
 
@@ -66,13 +68,13 @@ var result = Scss.ConvertToCss(@"@import ""foo"";", new ScssOptions()
 
 ## Build
 
-Currently, the compiled version of libsass shipped with SharpScss is a custom build from the fork [xoofx/libsass](https://github.com/xoofx/libsass/tree/develop) branch [develop](https://github.com/xoofx/libsass/tree/develop).
+Currently, the compiled version of libsass shipped with SharpScss is a custom build from the fork [xoofx/libsass/3.4-stable](https://github.com/xoofx/libsass/tree/3.4-stable)
 
-This fork is mainly allowing to compile libsass with VS2013 C/C++ Runtime.
+This fork is mainly allowing to compile libsass without the MSVC C/C++ Runtime on Windows.
 
 ## TODO Tasks
 
-- [ ] Build and package libsass binaries for Linux
+- [ ] Build and package libsass binaries for Linux (partially done, Ubuntu 14 package added, wip)
 - [ ] Build and package libsass binaries for MacOSX
 
 ## License

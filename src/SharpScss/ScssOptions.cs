@@ -35,8 +35,8 @@ namespace SharpScss
 
         ///// <summary>
         ///// Gets or sets the maximum number of digits after the decimal. Default is 5. 
+        ///// TODO: the C function is not working
         ///// </summary>
-        /// TODO: the C function is not working
         //public int Precision { get; set; }
 
         /// <summary>

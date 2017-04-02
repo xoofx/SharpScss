@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>A P/Invoke .NET wrapper around libsass to convert SCSS to CSS supporting NET2.0/NET3.5/NET4.x+ and CoreCLR platform</Description>
+    <Copyright>Alexandre Mutel</Copyright>
+    <AssemblyTitle>SharpScss</AssemblyTitle>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <VersionPrefix>1.3.0</VersionPrefix>
+    <Authors>Alexandre Mutel</Authors>
+    <TargetFrameworks>net20;net35;net40;netstandard1.3</TargetFrameworks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>SharpScss</AssemblyName>
+    <PackageId>SharpScss</PackageId>
+    <PackageTags>libsass;SCSS;SASS;CSS</PackageTags>
+    <PackageReleaseNotes>- upgrade to libsass 3.4.4</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/xoofx/SharpScss</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/xoofx/SharpScss/blob/master/license.txt</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git://github.com/xoofx/SharpScss</RepositoryUrl>
+    <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.3' ">1.6.0</NetStandardImplicitPackageVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="build\*">
+      <PackagePath>build/</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="runtimes\win7-x86\native\*">
+      <PackagePath>runtimes/win7-x86/native/</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="runtimes\win7-x64\native\*">
+      <PackagePath>runtimes/win7-x64/native/</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="runtimes\ubuntu.14.04-x64\native\*">
+      <PackagePath>runtimes/ubuntu.14.04-x64/native/</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net20' ">
+    <Reference Include="System" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net35' ">
+    <Reference Include="System" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net20' ">
+    <DefineConstants>$(DefineConstants);SUPPORT_UTF8_GETBYTES_UNSAFE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
+    <DefineConstants>$(DefineConstants);CORE;SUPPORT_UTF8_GETSTRING_UNSAFE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net20|x64'" />
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net20|x86'" />
+
+</Project>

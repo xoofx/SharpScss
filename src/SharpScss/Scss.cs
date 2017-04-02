@@ -156,7 +156,7 @@ namespace SharpScss
         private static unsafe List<string> GetIncludedFiles(LibSass.Sass_Context context)
         {
             var filesCount = (int)LibSass.sass_context_get_included_files_size(context);
-            var files = LibSass.sass_context_get_included_files(context);
+            var files = (LibSass.StringUtf8*)LibSass.sass_context_get_included_files(context);
             List<string> list = null;
             for(int i = 0; i < filesCount; i++)
             { 
@@ -194,7 +194,7 @@ namespace SharpScss
 
             // TODO: The C function is not working?
             //LibSass.sass_option_set_precision(nativeOptions, options.Precision);
-            LibSass.sass_option_set_output_style(nativeOptions, options.OutputStyle);
+            LibSass.sass_option_set_output_style(nativeOptions, (LibSass.Sass_Output_Style)(int)options.OutputStyle);
             LibSass.sass_option_set_source_comments(nativeOptions, options.SourceComments);
             LibSass.sass_option_set_source_map_embed(nativeOptions, options.SourceMapEmbed);
             LibSass.sass_option_set_source_map_contents(nativeOptions, options.SourceMapContents);
@@ -211,7 +211,7 @@ namespace SharpScss
                     cookieHandle = GCHandle.Alloc(options.TryImport, GCHandleType.Normal);
                     var cookie = GCHandle.ToIntPtr(cookieHandle.Value);
 
-                    var importer = LibSass.sass_make_importer(new LibSass.Sass_Importer_Fn(ScssImporterPtr), 0, (void*) cookie);
+                    var importer = LibSass.sass_make_importer(new LibSass.Sass_Importer_Fn(ScssImporterPtr), 0, cookie);
                     LibSass.sass_importer_set_list_entry(importerList, 0, importer);
                     LibSass.sass_option_set_c_importers(nativeOptions, importerList);
                     // TODO: Should we deallocate with sass_delete_importer at some point?
@@ -282,7 +282,7 @@ namespace SharpScss
             var previous = LibSass.sass_compiler_get_last_import(compiler);
             string previousPath = LibSass.sass_import_get_abs_path(previous);
 
-            var cookieHandle = GCHandle.FromIntPtr(new IntPtr(cookie));
+            var cookieHandle = GCHandle.FromIntPtr(cookie);
             var tryImport = (ScssOptions.TryImportDelegate)cookieHandle.Target;
 
             var file = (string)currentPath;
