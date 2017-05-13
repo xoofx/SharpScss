@@ -16,21 +16,6 @@ namespace SharpScss
     {
         private const string LibSassDll = "libsass";
 
-#if !CORE
-        static LibSass()
-        {
-            // This code is only working on Windows NET2-NET4.5 platforms. We preload the assembly depending on the x86/x64 platform
-            // so that further DllImport in this class will work automatically
-            var directory = Path.GetDirectoryName(typeof (LibSass).Assembly.Location);
-            var loadPath = Path.Combine(directory, (IntPtr.Size == 8 ? @"x64\" : @"x86\") + LibSassDll + ".dll");
-            LoadLibrary(loadPath);
-        }
-#endif
-
-        [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Ansi)]
-        private static extern IntPtr LoadLibrary([MarshalAs(UnmanagedType.LPStr)]string lpFileName);
-
-
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate Sass_Import_List sass_importer_delegate(LibSass.StringUtf8 cur_path, LibSass.Sass_Importer_Entry cb, LibSass.Sass_Compiler compiler);
 

@@ -5,14 +5,29 @@
     <Copyright>Alexandre Mutel</Copyright>
     <AssemblyTitle>SharpScss</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>1.3.4</VersionPrefix>
+    <VersionPrefix>1.3.5</VersionPrefix>
     <Authors>Alexandre Mutel</Authors>
     <TargetFrameworks>net20;net35;net40;netstandard1.3</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AssemblyName>SharpScss</AssemblyName>
     <PackageId>SharpScss</PackageId>
     <PackageTags>libsass;SCSS;SASS;CSS</PackageTags>
-    <PackageReleaseNotes>- upgrade to libsass 3.4.4</PackageReleaseNotes>
+<PackageReleaseNotes>
+&gt; 1.3.5
+  - Better support for NET20, NET35, NET40 by copying by default the win7-x64 libsass.dll to the folder.
+    The platform runtime can be changed in your project by using the SharpScssRuntime variable set by default to `win7-x64`
+    
+    The possible values for SharpScssRuntime are:
+    - `win7-x86`
+    - `win7-x64`
+    - `osx.10.10-x64`
+    - `ubuntu.14.04-x64`
+    
+    For the netstandard1.3+ platforms (.NET Core), it is based on the RID of your `netcoreapp` project
+
+  &gt; 1.3.4
+  - upgrade to libsass 3.4.4
+</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/xoofx/SharpScss</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/xoofx/SharpScss/blob/master/license.txt</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
@@ -23,6 +38,18 @@
   <ItemGroup>
     <Content Include="runtimes\**\*">
       <PackagePath>%(Identity)</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="build\SharpScss.targets">
+      <PackagePath>build/net20/SharpScss.targets</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="build\SharpScss.targets">
+      <PackagePath>build/net35/SharpScss.targets</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="build\SharpScss.targets">
+      <PackagePath>build/net40/SharpScss.targets</PackagePath>
       <Pack>true</Pack>
     </Content>
   </ItemGroup>
@@ -41,6 +68,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="build\" />
     <Folder Include="Properties\" />
   </ItemGroup>
 

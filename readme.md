@@ -66,18 +66,37 @@ var result = Scss.ConvertToCss(@"@import ""foo"";", new ScssOptions()
 });
 ```
 
+## Runtime
+
+SharpScss depends on the native runtime `libsass`. This runtime is compiled for the following platform/runtime:
+
+- `win7-x86`
+- `win7-x64`
+- `ubuntu.14.04-x64`
+- `osx.10.10-x64`
+
+On .NET Core (`netcoreapp`), the runtime is selected based on the [Runtime Identifier - RID](https://docs.microsoft.com/en-us/dotnet/articles/core/rid-catalog) of your project.
+
+- You can add to your csproj the specific targeting runtimes your `netcoreapp` with `<RuntimeIdentifiers>win7-x86;ubuntu.14.04-x64</RuntimeIdentifiers>` or `<RuntimeIdentifier>` if you have only one runtime to target (See [Additions to the csproj format for .NET Core](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/csproj))
+
+On .NET20, .NET35, .NET45, it is using a project variable `SharpScssRuntime`
+
+By default, `SharpScssRuntime` selects `win7-x86` if `Prefer 32 Bit` is selected in your project (variable `Prefer32Bit` in your csproj), otherwise it will use the `win7-x64`
+
+In case you are running SharpScss on Mono on a non Windows platform, you will have to set `SharpScssRuntime` to the proper supported SharpScss RID listed above.
+
 ## Build
 
 Currently, the compiled version of libsass shipped with SharpScss is a custom build from the fork [xoofx/libsass/3.4-stable](https://github.com/xoofx/libsass/tree/3.4-stable)
 
 This fork is mainly allowing to compile libsass without the MSVC C/C++ Runtime on Windows.
 
-## TODO Tasks
+## Known issues
 
-- [ ] Build and package libsass binaries for Linux (partially done, Ubuntu 14 package added, wip)
-- [ ] Build and package libsass binaries for MacOSX
+The `Scss.Version` is returning `[NA]` instead of the proper libsass native version.
 
 ## License
+
 This software is released under the [BSD-Clause 2 license](http://opensource.org/licenses/BSD-2-Clause). 
 
 ## Author
