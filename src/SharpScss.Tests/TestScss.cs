@@ -21,6 +21,13 @@ namespace SharpScss.Tests
         }
 
         [Test]
+        public void TestVersion()
+        {
+            var version = Scss.Version;
+            Assert.True(version.StartsWith("3.4.4"));
+        }
+
+        [Test]
         public void TestConvertToCss()
         {
             var result = Scss.ConvertToCss(@"div {color: #FFF;}");
