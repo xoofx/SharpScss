@@ -91,10 +91,6 @@ Currently, the compiled version of libsass shipped with SharpScss is a custom bu
 
 This fork is mainly allowing to compile libsass without the MSVC C/C++ Runtime on Windows.
 
-## Known issues
-
-The `Scss.Version` is returning `[NA]` instead of the proper libsass native version.
-
 ## License
 
 This software is released under the [BSD-Clause 2 license](http://opensource.org/licenses/BSD-2-Clause). 
