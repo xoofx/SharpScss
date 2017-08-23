@@ -4,14 +4,15 @@
 
 using System;
 using System.IO;
-using NUnit.Framework;
+using Xunit;
+using TestAttribute = Xunit.FactAttribute;
+
 
 namespace SharpScss.Tests
 {
     /// <summary>
     /// Basic test for <see cref="Scss.ConvertToCss"/> and <see cref="Scss.ConvertFileToCss"/>.
     /// </summary>
-    [TestFixture]
     public class TestScss
     {
         public TestScss()
@@ -29,13 +30,13 @@ namespace SharpScss.Tests
 
         [Test]
         public void TestConvertToCss()
-        {
+        {               
             var result = Scss.ConvertToCss(@"div {color: #FFF;}");
             Assert.NotNull(result.Css);
             Assert.Null(result.SourceMap);
             Assert.Null(result.IncludedFiles);
             var css = result.Css.Replace("\n","").Replace(" ", "").Trim();
-            Assert.AreEqual("div{color:#FFF;}", css);
+            Assert.Equal("div{color:#FFF;}", css);
         }
 
         [Test]
@@ -46,7 +47,7 @@ namespace SharpScss.Tests
             Assert.Null(result.SourceMap);
             Assert.Null(result.IncludedFiles);
             var css = result.Css.Trim();
-            Assert.AreEqual("div{color:#FFF}", css);
+            Assert.Equal("div{color:#FFF}", css);
         }
 
         [Test]
@@ -62,7 +63,7 @@ namespace SharpScss.Tests
             Assert.NotNull(result.SourceMap);
             Assert.Null(result.IncludedFiles);
             var css = result.Css.Replace("\n", "").Replace(" ", "").Trim();
-            Assert.AreEqual("div{color:#FFF;}/*#sourceMappingURL=Test.css.map*/", css);
+            Assert.Equal("div{color:#FFF;}/*#sourceMappingURL=Test.css.map*/", css);
         }
 
         [Test]
@@ -74,8 +75,8 @@ namespace SharpScss.Tests
                 InputFile = "test.scss",
                 TryImport = (string file, string path, out string scss, out string map) =>
                 {
-                    Assert.AreEqual("foo", file);
-                    Assert.AreEqual(Path.Combine(Environment.CurrentDirectory, "test.scss"), new FileInfo(path).FullName);
+                    Assert.Equal("foo", file);
+                    Assert.Equal(Path.Combine(Environment.CurrentDirectory, "test.scss"), new FileInfo(path).FullName);
                     scss = "div {color: #FFF;}";
                     map = null;
                     return true;
@@ -84,10 +85,10 @@ namespace SharpScss.Tests
             Assert.NotNull(result.Css);
             Assert.Null(result.SourceMap);
             Assert.NotNull(result.IncludedFiles);
-            Assert.AreEqual(1, result.IncludedFiles.Count);
-            Assert.AreEqual("foo", result.IncludedFiles[0]);
+            Assert.Equal(1, result.IncludedFiles.Count);
+            Assert.Equal("foo", result.IncludedFiles[0]);
             var css = result.Css.Trim();
-            Assert.AreEqual("div{color:#FFF}", css);
+            Assert.Equal("div{color:#FFF}", css);
         }
 
         [Test]
@@ -104,26 +105,26 @@ namespace SharpScss.Tests
             Assert.NotNull(result.Css);
             Assert.Null(result.SourceMap);
             Assert.NotNull(result.IncludedFiles);
-            Assert.AreEqual(2, result.IncludedFiles.Count);
-            Assert.AreEqual(Path.Combine(Environment.CurrentDirectory, @"files\test.scss"), new FileInfo(result.IncludedFiles[0]).FullName);
-            Assert.AreEqual(Path.Combine(Environment.CurrentDirectory, @"files\subfolder\foo.scss"), new FileInfo(result.IncludedFiles[1]).FullName);
+            Assert.Equal(2, result.IncludedFiles.Count);
+            Assert.Equal(Path.Combine(Environment.CurrentDirectory, @"files\test.scss"), new FileInfo(result.IncludedFiles[0]).FullName);
+            Assert.Equal(Path.Combine(Environment.CurrentDirectory, @"files\subfolder\foo.scss"), new FileInfo(result.IncludedFiles[1]).FullName);
             var css = result.Css.Trim();
-            Assert.AreEqual("div{color:#FFF}", css);
+            Assert.Equal("div{color:#FFF}", css);
         }
 
         [Test]
         public void TestParsingException()
         {
-            var exception = Assert.Catch<ScssException>(() => Scss.ConvertToCss(@"div {"));
-            Assert.AreEqual(5, exception.Column);
-            Assert.AreEqual(1, exception.Line);
+            var exception = Assert.Throws<ScssException>(() => Scss.ConvertToCss(@"div {"));
+            Assert.Equal(5, exception.Column);
+            Assert.Equal(1, exception.Line);
             Assert.True(exception.ErrorText.Contains("expected"));
         }
 
         [Test]
         public void TestExceptionWithTryImport()
         {
-            var exception = Assert.Catch<ScssException>(() => Scss.ConvertToCss(@"@import ""foo"";", new ScssOptions()
+            var exception = Assert.Throws<ScssException>(() => Scss.ConvertToCss(@"@import ""foo"";", new ScssOptions()
             {
                 InputFile = "test.scss",
                 TryImport = (string file, string path, out string scss, out string map) =>
@@ -133,8 +134,8 @@ namespace SharpScss.Tests
                     return false;
                 }
             }));
-            Assert.AreEqual(1, exception.Line);
-            Assert.AreEqual(9, exception.Column);
+            Assert.Equal(1, exception.Line);
+            Assert.Equal(9, exception.Column);
             Assert.True(exception.ErrorText.StartsWith("Unable to find include file for @import"));
         }
     }

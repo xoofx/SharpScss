@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <SharpScssRuntime Condition=" '$(SharpScssRuntime)' == '' AND ('$(Prefer32Bit)' == 'true' OR '$(PlatformTarget)' == 'x86')">win7-x86</SharpScssRuntime>
-    <SharpScssRuntime Condition=" '$(SharpScssRuntime)' == '' AND '$(OS)' == 'Unix'">ubuntu.14.04-x64</SharpScssRuntime>
-    <SharpScssRuntime Condition=" '$(SharpScssRuntime)' == '' ">win7-x64</SharpScssRuntime>
+    <SharpScssRuntime Condition=" '$(SharpScssRuntime)' == '' AND ('$(Prefer32Bit)' == 'true' OR '$(PlatformTarget)' == 'x86')">win-x86</SharpScssRuntime>
+    <SharpScssRuntime Condition=" '$(SharpScssRuntime)' == '' AND '$(OS)' == 'Unix'">linux-x64</SharpScssRuntime>
+    <SharpScssRuntime Condition=" '$(SharpScssRuntime)' == '' ">win-x64</SharpScssRuntime>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)..\..\runtimes\$(SharpScssRuntime)\native\libsass.*">

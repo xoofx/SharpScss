@@ -12,7 +12,7 @@ Based on the version of `libsass 3.4.4`
 - Supports for source maps
 - Supports for `libsass` user custom importer callback in `ScssOptions.TryImport`
 - Supports for .NET2.0, .NET3.5, .NET4.x+ and CoreCLR (netstandard1.3 from dotnet)
-- Supports `Windows x86`, `Windows x64`, `Ubuntu 14.04-x64` and `OSX`
+- Supports `Windows x86`, `Windows x64`, `linux-x64` and `osx-x64`
 
 ## Download
 
@@ -70,18 +70,18 @@ var result = Scss.ConvertToCss(@"@import ""foo"";", new ScssOptions()
 
 SharpScss depends on the native runtime `libsass`. This runtime is compiled for the following platform/runtime:
 
-- `win7-x86`
-- `win7-x64`
-- `ubuntu.14.04-x64`
-- `osx.10.10-x64`
+- `win-x86`
+- `win-x64`
+- `linux-x64`
+- `osx-x64`
 
 On .NET Core (`netcoreapp`), the runtime is selected based on the [Runtime Identifier - RID](https://docs.microsoft.com/en-us/dotnet/articles/core/rid-catalog) of your project.
 
-- You can add to your csproj the specific targeting runtimes your `netcoreapp` with `<RuntimeIdentifiers>win7-x86;ubuntu.14.04-x64</RuntimeIdentifiers>` or `<RuntimeIdentifier>` if you have only one runtime to target (See [Additions to the csproj format for .NET Core](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/csproj))
+- You can add to your csproj the specific targeting runtimes your `netcoreapp` with `<RuntimeIdentifiers>win-x86;linux-x64</RuntimeIdentifiers>` or `<RuntimeIdentifier>` if you have only one runtime to target (See [Additions to the csproj format for .NET Core](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/csproj))
 
 On .NET20, .NET35, .NET45, it is using a project variable `SharpScssRuntime`
 
-By default, `SharpScssRuntime` selects `win7-x86` if `Prefer 32 Bit` is selected in your project (variable `Prefer32Bit` in your csproj), otherwise it will use the `win7-x64`
+By default, `SharpScssRuntime` selects `win-x86` if `Prefer 32 Bit` is selected in your project (variable `Prefer32Bit` in your csproj), otherwise it will use the `win-x64`
 
 In case you are running SharpScss on Mono on a non Windows platform, you will have to set `SharpScssRuntime` to the proper supported SharpScss RID listed above.
 
