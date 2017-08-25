@@ -35,7 +35,7 @@ artifacts:
   name: SharpScss Nugets
 test_script:
   - dotnet --version
-  - dotnet test
+  - dotnet test SharpScss.Tests\SharpScss.Tests.csproj
 deploy:
 - provider: NuGet
   api_key:
