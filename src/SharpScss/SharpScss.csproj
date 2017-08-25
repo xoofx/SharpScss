@@ -48,15 +48,15 @@
       <PackagePath>%(Identity)</PackagePath>
       <Pack>true</Pack>
     </Content>
-    <Content Include="build\SharpScss.targets">
+    <Content Include="build\net20-35-40\SharpScss.targets">
       <PackagePath>build/net20/SharpScss.targets</PackagePath>
       <Pack>true</Pack>
     </Content>
-    <Content Include="build\SharpScss.targets">
+    <Content Include="build\net20-35-40\SharpScss.targets">
       <PackagePath>build/net35/SharpScss.targets</PackagePath>
       <Pack>true</Pack>
     </Content>
-    <Content Include="build\SharpScss.targets">
+    <Content Include="build\net20-35-40\SharpScss.targets">
       <PackagePath>build/net40/SharpScss.targets</PackagePath>
       <Pack>true</Pack>
     </Content>
@@ -76,7 +76,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="build\" />
     <Folder Include="Properties\" />
   </ItemGroup>
 

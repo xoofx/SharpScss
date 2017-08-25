@@ -33,7 +33,6 @@ before_package:
 artifacts:
 - path: src\SharpScss\Bin\Release\*.nupkg
   name: SharpScss Nugets
-test: off
 deploy:
 - provider: NuGet
   api_key:

@@ -23,5 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SharpScss\SharpScss.csproj" />
   </ItemGroup>
+  
+  <Import Project="..\SharpScss\build\net20-35-40\SharpScss.targets" />
 
  </Project>
