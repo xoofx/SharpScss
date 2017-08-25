@@ -33,6 +33,9 @@ before_package:
 artifacts:
 - path: src\SharpScss\Bin\Release\*.nupkg
   name: SharpScss Nugets
+test_script:
+  - dotnet --version
+  - dotnet test
 deploy:
 - provider: NuGet
   api_key:
