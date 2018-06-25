@@ -129,7 +129,7 @@ namespace SharpScss
         public static extern Sass_Value sass_make_color(double r, double g, double b, double a);
 
         [DllImport(LibSassDll, EntryPoint = "sass_make_list",CallingConvention = CallingConvention.Cdecl)]
-        public static extern Sass_Value sass_make_list(size_t len, Sass_Separator sep);
+        public static extern Sass_Value sass_make_list(size_t len, Sass_Separator sep, bool is_bracketed);
 
         [DllImport(LibSassDll, EntryPoint = "sass_make_map",CallingConvention = CallingConvention.Cdecl)]
         public static extern Sass_Value sass_make_map(size_t len);
@@ -285,6 +285,12 @@ namespace SharpScss
 
         [DllImport(LibSassDll, EntryPoint = "sass_list_set_separator",CallingConvention = CallingConvention.Cdecl)]
         public static extern void sass_list_set_separator(Sass_Value v, Sass_Separator value);
+
+        [DllImport(LibSassDll, EntryPoint = "sass_list_get_is_bracketed",CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool sass_list_get_is_bracketed(Sass_Value v);
+
+        [DllImport(LibSassDll, EntryPoint = "sass_list_set_is_bracketed",CallingConvention = CallingConvention.Cdecl)]
+        public static extern void sass_list_set_is_bracketed(Sass_Value v, bool value);
 
         /// <summary>
         /// Getters and setters for Sass_List values
@@ -1036,6 +1042,12 @@ namespace SharpScss
 
         [DllImport(LibSassDll, EntryPoint = "sass_compiler_get_callee_entry",CallingConvention = CallingConvention.Cdecl)]
         public static extern Sass_Callee_Entry sass_compiler_get_callee_entry(Sass_Compiler compiler, size_t idx);
+
+        /// <summary>
+        /// Push function for import extenions
+        /// </summary>
+        [DllImport(LibSassDll, EntryPoint = "sass_option_push_import_extension",CallingConvention = CallingConvention.Cdecl)]
+        public static extern void sass_option_push_import_extension(Sass_Options options, StringUtf8 ext);
 
         /// <summary>
         /// Push function for paths (no manipulation support for now)

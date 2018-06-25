@@ -1,4 +1,4 @@
-﻿// Copyright (c) Alexandre Mutel. All rights reserved.
+// Copyright (c) Alexandre Mutel. All rights reserved.
 // This file is licensed under the BSD-Clause 2 license. 
 // See the license.txt file in the project root for more information.
 
@@ -25,7 +25,7 @@ namespace SharpScss.Tests
         public void TestVersion()
         {
             var version = Scss.Version;
-            Assert.True(version.StartsWith("3.4.4"));
+            Assert.True(version.StartsWith("3.5.4"));
         }
 
         [Test]
