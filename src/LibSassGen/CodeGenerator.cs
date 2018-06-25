@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 using System.IO;
 
 namespace LibSassGen
 {
     public partial class CodeGenerator
     {
-        private const string DefaultIncludeDir = @"../../../../../libsass/include";
+        private const string DefaultIncludeDir = @"../../../../libsass/include";
 
-        private const string DefaultOutputFilePath = @"../../../../SharpScss/LibSass.Generated.cs";
+        private const string DefaultOutputFilePath = @"../../../SharpScss/LibSass.Generated.cs";
         private const int IndentMultiplier = 4;
 
         private int _indentLevel;
