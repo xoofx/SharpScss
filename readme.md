@@ -2,7 +2,7 @@
 
 SharpScss is a P/Invoke .NET wrapper around [libsass](https://github.com/sass/libsass) to convert SCSS to CSS supporting NET2.0/NET3.5/NET4.x+ and CoreCLR platform
 
-Based on the version of `libsass 3.4.4`
+Based on the version of `libsass 3.5.4`
 
 ## Features
 
@@ -11,7 +11,7 @@ Based on the version of `libsass 3.4.4`
 - Supports include paths
 - Supports for source maps
 - Supports for `libsass` user custom importer callback in `ScssOptions.TryImport`
-- Supports for .NET2.0, .NET3.5, .NET4.x+ and CoreCLR (netstandard1.3 from dotnet)
+- Supports for .NET2.0, .NET3.5, .NET4.x+ and CoreCLR (`netstandard1.3` and `netstandard2.0` from dotnet)
 - Supports `Windows x86`, `Windows x64`, `linux-x64` and `osx-x64`
 
 ## Download
@@ -87,7 +87,7 @@ In case you are running SharpScss on Mono on a non Windows platform, you will ha
 
 ## Build
 
-Currently, the compiled version of libsass shipped with SharpScss is a custom build from the fork [xoofx/libsass/3.4-stable](https://github.com/xoofx/libsass/tree/3.4-stable)
+Currently, the compiled version of libsass shipped with SharpScss is a custom build from the fork [xoofx/libsass/3.5-stable](https://github.com/xoofx/libsass/tree/3.5-stable)
 
 This fork is mainly allowing to compile libsass without the MSVC C/C++ Runtime on Windows.
 
