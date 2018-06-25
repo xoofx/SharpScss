@@ -5,37 +5,14 @@
     <Copyright>Alexandre Mutel</Copyright>
     <AssemblyTitle>SharpScss</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>1.3.8</VersionPrefix>
+    <VersionPrefix>1.4.0</VersionPrefix>
     <Authors>Alexandre Mutel</Authors>
     <TargetFrameworks>net20;net35;net40;netstandard1.3;netstandard2.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AssemblyName>SharpScss</AssemblyName>
     <PackageId>SharpScss</PackageId>
     <PackageTags>libsass;SCSS;SASS;CSS</PackageTags>
-<PackageReleaseNotes>
-&gt; 1.3.8
-  - Fix runtime for MacOSX
-&gt; 1.3.7
-  - Improve detection of x86 runtime on Windows for net20, net35, net40+
-
-&gt; 1.3.6
-  - Fix native library on Windows x86/x64 to return the correct version `Scss.Version`
-
-&gt; 1.3.5
-  - Better support for NET20, NET35, NET40 by copying by default the win7-x64 libsass.dll to the folder.
-    The platform runtime can be changed in your project by using the SharpScssRuntime variable set by default to `win7-x64`
-    
-    The possible values for SharpScssRuntime are:
-    - `win7-x86`
-    - `win7-x64`
-    - `osx.10.10-x64`
-    - `ubuntu.14.04-x64`
-    
-    For the netstandard1.3+ platforms (.NET Core), it is based on the RID of your `netcoreapp` project
-
-&gt; 1.3.4
-  - upgrade to libsass 3.4.4
-</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/xoofx/SharpScss/blob/master/changelog.md</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/xoofx/SharpScss</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/xoofx/SharpScss/blob/master/license.txt</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
