@@ -1,6 +1,6 @@
 # SharpScss [![Build status](https://ci.appveyor.com/api/projects/status/github/xoofx/sharpscss?svg=true)](https://ci.appveyor.com/project/xoofx/sharpscss/branch/master)  [![NuGet](https://img.shields.io/nuget/v/SharpScss.svg)](https://www.nuget.org/packages/SharpScss/)
 
-SharpScss is a P/Invoke .NET wrapper around [libsass](https://github.com/sass/libsass) to convert SCSS to CSS supporting NET2.0/NET3.5/NET4.x+ and CoreCLR platform
+SharpScss is a P/Invoke .NET wrapper around [libsass](https://github.com/sass/libsass) to convert SCSS to CSS.
 
 > Based on the version of `libsass 3.6.4`
 
