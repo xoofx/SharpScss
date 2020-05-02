@@ -1,20 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.8
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{061866E2-005C-4D13-A338-EA464BBEC60F}"
 	ProjectSection(SolutionItems) = preProject
-		..\appveyor.yml = ..\appveyor.yml
+		..\libsass\.github\workflows\build_libsass.yml = ..\libsass\.github\workflows\build_libsass.yml
+		..\changelog.md = ..\changelog.md
+		..\.github\workflows\ci.yml = ..\.github\workflows\ci.yml
 		..\license.txt = ..\license.txt
 		..\readme.md = ..\readme.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpScss", "SharpScss\SharpScss.csproj", "{2FD6B6F5-89E4-4D15-B7F9-19327640225D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpScss.Tests", "SharpScss.Tests\SharpScss.Tests.csproj", "{8AD83F92-2E0C-4C60-B2A4-83C7BCDF099E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpScss.Tests", "SharpScss.Tests\SharpScss.Tests.csproj", "{8AD83F92-2E0C-4C60-B2A4-83C7BCDF099E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibSassGen", "LibSassGen\LibSassGen.csproj", "{C4A1E522-4883-4E70-A822-DC877DEA2D82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibSassGen", "LibSassGen\LibSassGen.csproj", "{C4A1E522-4883-4E70-A822-DC877DEA2D82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,14 +32,10 @@ Global
 		{8AD83F92-2E0C-4C60-B2A4-83C7BCDF099E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AD83F92-2E0C-4C60-B2A4-83C7BCDF099E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AD83F92-2E0C-4C60-B2A4-83C7BCDF099E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C4A1E522-4883-4E70-A822-DC877DEA2D82}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{C4A1E522-4883-4E70-A822-DC877DEA2D82}.Debug|Any CPU.Build.0 = Debug|x64
-		{C4A1E522-4883-4E70-A822-DC877DEA2D82}.Release|Any CPU.ActiveCfg = Release|x64
-		{C4A1E522-4883-4E70-A822-DC877DEA2D82}.Release|Any CPU.Build.0 = Release|x64
-		{2D505078-BA39-4DD6-BACC-4807F23FC441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D505078-BA39-4DD6-BACC-4807F23FC441}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D505078-BA39-4DD6-BACC-4807F23FC441}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D505078-BA39-4DD6-BACC-4807F23FC441}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4A1E522-4883-4E70-A822-DC877DEA2D82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4A1E522-4883-4E70-A822-DC877DEA2D82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4A1E522-4883-4E70-A822-DC877DEA2D82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4A1E522-4883-4E70-A822-DC877DEA2D82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

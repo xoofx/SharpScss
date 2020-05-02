@@ -1,4 +1,4 @@
-﻿// Copyright (c) Alexandre Mutel. All rights reserved.
+// Copyright (c) Alexandre Mutel. All rights reserved.
 // This file is licensed under the BSD-Clause 2 license. 
 // See the license.txt file in the project root for more information.
 
@@ -15,8 +15,7 @@ namespace SharpScss
     public static class Scss
     {
         // NOTE: It is important to keep allocated delegate importer function, so that it will not be garbage collected
-        private static readonly LibSass.sass_importer_delegate ScssImporterLock;
-        private static readonly IntPtr ScssImporterPtr;
+        private static readonly LibSass.Sass_Importer_Fn ScssImporterLock;
         private static string version;
         private static string languageVersion;
         private static readonly ScssOptions DefaultOptions = new ScssOptions();
@@ -25,7 +24,6 @@ namespace SharpScss
         {
             // We must store the delegate so GetFunctionPointerForDelegate will not be orphaned
             ScssImporterLock = CustomScssImporter;
-            ScssImporterPtr = Marshal.GetFunctionPointerForDelegate(ScssImporterLock);
         }
 
         /// <summary>
@@ -128,18 +126,21 @@ namespace SharpScss
             }
             finally
             {
+                // Free any allocations that happened during the compilation
+                LibSass.SassAllocator.FreeNative();
+
                 // Release the cookie handle if any
                 if (tryImportHandle.HasValue && tryImportHandle.Value.IsAllocated)
                 {
                     tryImportHandle.Value.Free();
                 }
 
-                if (compiler.Pointer != IntPtr.Zero)
+                if (compiler.Handle != IntPtr.Zero)
                 {
                     LibSass.sass_delete_compiler(compiler);
                 }
 
-                if (context.Pointer != IntPtr.Zero)
+                if (context.Handle != IntPtr.Zero)
                 {
                     if (fromFile)
                     {
@@ -211,7 +212,7 @@ namespace SharpScss
                     cookieHandle = GCHandle.Alloc(options.TryImport, GCHandleType.Normal);
                     var cookie = GCHandle.ToIntPtr(cookieHandle.Value);
 
-                    var importer = LibSass.sass_make_importer(new LibSass.Sass_Importer_Fn(ScssImporterPtr), 0, cookie);
+                    var importer = LibSass.sass_make_importer(ScssImporterLock, 0, cookie);
                     LibSass.sass_importer_set_list_entry(importerList, 0, importer);
                     LibSass.sass_option_set_c_importers(nativeOptions, importerList);
                     // TODO: Should we deallocate with sass_delete_importer at some point?
@@ -275,7 +276,7 @@ namespace SharpScss
             return !Path.IsPathRooted(path) ? Path.Combine(Directory.GetCurrentDirectory(), path) : path;
         }
 
-        private static unsafe LibSass.Sass_Import_List CustomScssImporter(LibSass.StringUtf8 currentPath, LibSass.Sass_Importer_Entry cb, LibSass.Sass_Compiler compiler)
+        private static unsafe LibSass.Sass_Import_List CustomScssImporter(string currentPath, LibSass.Sass_Importer_Entry cb, LibSass.Sass_Compiler compiler)
         {
             var cookie = LibSass.sass_importer_get_cookie(cb);
 
@@ -299,7 +300,7 @@ namespace SharpScss
                     if (tryImport(file, previousPath, out scss, out map))
                     {
                         var entry = LibSass.sass_make_import_entry(file, scss, map);
-                        *(LibSass.Sass_Import_Entry*)importList.Pointer = entry;
+                        *(LibSass.Sass_Import_Entry*)importList.Value = entry;
                         return importList;
                     }
                 }
@@ -321,7 +322,7 @@ namespace SharpScss
             }
             {
                 var entry = LibSass.sass_make_import_entry(file, null, null);
-                *(LibSass.Sass_Import_Entry*)importList.Pointer = entry;
+                *(LibSass.Sass_Import_Entry*)importList.Value = entry;
 
                 LibSass.sass_import_set_error(entry, errorMessage, line, column);
             }
