@@ -1,5 +1,9 @@
 # Changelog for SharpScss
 
+## 1.5.0 (2 May 2020)
+- Update libsass to 3.6.4
+- Support only .NET Standard 2.0+
+
 ## 1.4.0 (25 June 2018)
   - Update libsass to 3.5.4
 

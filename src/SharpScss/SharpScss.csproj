@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>A P/Invoke .NET wrapper around libsass to convert SCSS to CSS supporting NET2.0/NET3.5/NET4.x+ and CoreCLR platform</Description>
+    <Description>A P/Invoke .NET wrapper around libsass to convert SCSS to CSS for .NET</Description>
     <Copyright>Alexandre Mutel</Copyright>
     <AssemblyTitle>SharpScss</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>1.4.0</VersionPrefix>
+    <VersionPrefix>1.5.0</VersionPrefix>
     <Authors>Alexandre Mutel</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
