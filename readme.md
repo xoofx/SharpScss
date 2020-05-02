@@ -81,15 +81,9 @@ On .NET Core (`netcoreapp`), the runtime is selected based on the [Runtime Ident
 
 - You can add to your csproj the specific targeting runtimes your `netcoreapp` with `<RuntimeIdentifiers>win-x86;linux-x64</RuntimeIdentifiers>` or `<RuntimeIdentifier>` if you have only one runtime to target (See [Additions to the csproj format for .NET Core](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/csproj))
 
-On .NET20, .NET35, .NET45, it is using a project variable `SharpScssRuntime`
-
-By default, `SharpScssRuntime` selects `win-x86` if `Prefer 32 Bit` is selected in your project (variable `Prefer32Bit` in your csproj), otherwise it will use the `win-x64`
-
-In case you are running SharpScss on Mono on a non Windows platform, you will have to set `SharpScssRuntime` to the proper supported SharpScss RID listed above.
-
 ## Build
 
-Currently, the compiled version of libsass shipped with SharpScss is a custom build from the fork [xoofx/libsass/3.5-stable](https://github.com/xoofx/libsass/tree/3.5-stable)
+Currently, the compiled version of libsass shipped with SharpScss is a custom build from the fork [xoofx/libsass](https://github.com/xoofx/libsass)
 
 This fork is mainly allowing to compile libsass without the MSVC C/C++ Runtime on Windows.
 
