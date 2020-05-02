@@ -1,5 +1,5 @@
 // Copyright (c) Alexandre Mutel. All rights reserved.
-// This file is licensed under the BSD-Clause 2 license. 
+// This file is licensed under the BSD-Clause 2 license.
 // See the license.txt file in the project root for more information.
 
 using System;
@@ -104,18 +104,10 @@ namespace SharpScss
                     return new StringUtf8(IntPtr.Zero);
                 }
 
-#if SUPPORT_UTF8_GETBYTES_UNSAFE
                 var length = Encoding.UTF8.GetByteCount(text);
                 var pointer = sass_alloc_memory(length+1);
                 fixed (char* pText = text)
                     Encoding.UTF8.GetBytes(pText, text.Length, (byte*) pointer, length);
-#else
-
-                var buffer = Encoding.UTF8.GetBytes(text);
-                var length = buffer.Length;
-                var pointer = sass_alloc_memory(length+1);
-                Marshal.Copy(buffer, 0, pointer, length);
-#endif
                 ((byte*)pointer)[length] = 0;
                 return new StringUtf8(pointer);
             }
@@ -129,15 +121,7 @@ namespace SharpScss
                     pText++;
                 }
                 int length = (int)(pText - (byte*)utfString);
-#if SUPPORT_UTF8_GETSTRING_UNSAFE
                 var text = Encoding.UTF8.GetString((byte*)utfString, length);
-#else
-                // should not be null terminated
-                byte[] strbuf = new byte[length]; // TODO: keep a buffer bool
-                // skip the trailing null
-                Marshal.Copy(utfString, strbuf, 0, length);
-                var text = Encoding.UTF8.GetString(strbuf,0, length);
-#endif
                 return text;
             }
         }
