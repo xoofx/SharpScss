@@ -3,6 +3,7 @@
 // See the license.txt file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
 
@@ -87,7 +88,7 @@ namespace SharpScss.Tests
             {
                 OutputStyle = ScssOutputStyle.Compressed,
                 InputFile = "test.scss",
-                TryImport = (string file, string path, out string scss, out string map) =>
+                TryImport = (ref string file, string path, out string scss, out string map) =>
                 {
                     Assert.AreEqual("foo", file);
                     Assert.AreEqual(Path.Combine(Environment.CurrentDirectory, "test.scss"), new FileInfo(path).FullName);
@@ -141,7 +142,7 @@ namespace SharpScss.Tests
             var exception = Assert.Throws<ScssException>(() => Scss.ConvertToCss(@"@import ""foo"";", new ScssOptions()
             {
                 InputFile = "test.scss",
-                TryImport = (string file, string path, out string scss, out string map) =>
+                TryImport = (ref string file, string path, out string scss, out string map) =>
                 {
                     scss = null;
                     map = null;
@@ -151,6 +152,43 @@ namespace SharpScss.Tests
             Assert.AreEqual(1, exception.Line);
             Assert.AreEqual(9, exception.Column);
             Assert.True(exception.ErrorText.StartsWith("Unable to find include file for @import"));
+        }
+
+
+        [Test]
+        public void TestTryImportFromMemory()
+        {
+            var collectPaths = new List<string>();
+            var result = Scss.ConvertToCss(@"@import ""foo"";", new ScssOptions()
+            {
+                InputFile = "/test.scss",
+                OutputStyle = ScssOutputStyle.Compressed,
+                TryImport = (ref string file, string path, out string scss, out string map) =>
+                {
+                    collectPaths.Add(path);
+                    if (file == "foo")
+                    {
+                        file = "/this/is/a/sub/folder/" + file + ".scss";
+                        scss = "@import 'local/bar';";
+                    }
+                    else
+                    {
+                        file = "/this/is/a/sub/folder/" + file + ".css";
+                        scss = ".foo { color: red; }";
+                    }
+                    map = null;
+                    return true;
+                }
+            });
+            Assert.AreEqual(".foo{color:red}", result.Css.TrimEnd());
+
+            Assert.AreEqual(2, collectPaths.Count);
+            Assert.AreEqual("/test.scss", collectPaths[0]);
+            Assert.AreEqual("/this/is/a/sub/folder/foo.scss", collectPaths[1]);
+
+            Assert.AreEqual(2, result.IncludedFiles.Count);
+            Assert.AreEqual("/this/is/a/sub/folder/foo.scss", result.IncludedFiles[0]);
+            Assert.AreEqual("/this/is/a/sub/folder/local/bar.css", result.IncludedFiles[1]);
         }
     }
 }

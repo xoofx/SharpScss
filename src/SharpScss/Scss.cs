@@ -297,7 +297,7 @@ namespace SharpScss
                 {
                     string scss;
                     string map;
-                    if (tryImport(file, previousPath, out scss, out map))
+                    if (tryImport(ref file, previousPath, out scss, out map))
                     {
                         var entry = LibSass.sass_make_import_entry(file, scss, map);
                         *(LibSass.Sass_Import_Entry*)importList.Value = entry;
