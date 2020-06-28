@@ -53,14 +53,17 @@ Console.WriteLine(result.Css);
 Console.WriteLine(result.SourceMap);
 ```
 
-You can use also custom dynamic import through the delegate `ScssOptions.TryImport`:
+You can use also custom dynamic import through the delegate `ScssOptions.TryImport`. Note that in that cases `ScssOptions.IncludePaths` is not used 
+and it is the responsability of the `TryImport` to perform the resolution (e.g on a virtual file system):
 
 ``` 
 var result = Scss.ConvertToCss(@"@import ""foo"";", new ScssOptions()
 {
 	InputFile = "test.scss",
-	TryImport = (string file, string path, out string scss, out string map) =>
+	TryImport = (ref string file, string path, out string scss, out string map) =>
 	{
+        // Add resolve the file
+        // file = resolvedFilePath; // Can change the file resolved
 		scss = ...; // TODO: handle the loading of scss for the specified file
 		map = null;
 		return true;

@@ -1,5 +1,8 @@
 # Changelog for SharpScss
 
+## 2.0.0 (28 Jun 2020)
+- Breaking change of ScssOptions.TryImport delegate. The file parameter is now passed by ref in order to provide the resolved file path.
+
 ## 1.5.0 (2 May 2020)
 - Update libsass to 3.6.4
 - Support only .NET Standard 2.0+
