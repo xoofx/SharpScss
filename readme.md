@@ -13,7 +13,7 @@ SharpScss is a P/Invoke .NET wrapper around [libsass](https://github.com/sass/li
 - Supports include paths
 - Supports for source maps
 - Supports for `libsass` user custom importer callback in `ScssOptions.TryImport`
-- Supports for `.NET Standard 2.0+`
+- Supports for `netstandard2.0` and `net8.0`+
 - Supports the following platforms:
     - `win-x86`
     - `win-x64`
