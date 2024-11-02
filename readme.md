@@ -1,6 +1,6 @@
 # SharpScss [![Build Status](https://github.com/xoofx/SharpScss/workflows/ci/badge.svg?branch=master)](https://github.com/xoofx/SharpScss/actions)  [![NuGet](https://img.shields.io/nuget/v/SharpScss.svg)](https://www.nuget.org/packages/SharpScss/)
 
-<img align="right" width="160px" height="160px" src="https://raw.githubusercontent.com/xoofx/SharpScss/main/img/SharpScss.png">
+<img align="right" width="160px" height="160px" src="https://raw.githubusercontent.com/xoofx/SharpScss/master/img/SharpScss.png">
 
 SharpScss is a P/Invoke .NET wrapper around [libsass](https://github.com/sass/libsass) to convert SCSS to CSS.
 
