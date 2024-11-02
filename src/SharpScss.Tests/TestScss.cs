@@ -19,9 +19,6 @@ public class TestScss
 {
     public TestScss()
     {
-        // Make sure the CurrentDirectory is the same as this assembly (JetBrain Resharper Unittest bug in 10.x???)
-        Environment.CurrentDirectory = Path.GetDirectoryName(typeof(TestScss).Assembly.Location);
-
         // Custom loading of native library
         //string arch;
         //switch (System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture)
@@ -171,8 +168,8 @@ public class TestScss
         Assert.IsNull(result.SourceMap);
         Assert.IsNotNull(result.IncludedFiles);
         Assert.AreEqual(2, result.IncludedFiles.Count);
-        Assert.AreEqual(Path.Combine(Environment.CurrentDirectory, @"files\test.scss"), new FileInfo(result.IncludedFiles[0]).FullName);
-        Assert.AreEqual(Path.Combine(Environment.CurrentDirectory, @"files\subfolder\foo.scss"), new FileInfo(result.IncludedFiles[1]).FullName);
+        Assert.AreEqual(Path.Combine(Environment.CurrentDirectory, "files", "test.scss"), new FileInfo(result.IncludedFiles[0]).FullName);
+        Assert.AreEqual(Path.Combine(Environment.CurrentDirectory, "files", "subfolder", "foo.scss"), new FileInfo(result.IncludedFiles[1]).FullName);
         var css = result.Css.Trim();
         Assert.AreEqual("div{color:#FFF}", css);
     }
