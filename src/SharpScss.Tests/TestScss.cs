@@ -156,12 +156,12 @@ public class TestScss
     [TestMethod]
     public void TestConvertFileToCssWithIncludes()
     {
-        var result = Scss.ConvertFileToCss(@"files\test.scss", new ScssOptions()
+        var result = Scss.ConvertFileToCss(Path.Combine("files", "test.scss"), new ScssOptions()
         {
             OutputStyle = ScssOutputStyle.Compressed,
             IncludePaths =
             {
-                @"files\subfolder"
+                Path.Combine("files", "subfolder")
             }
         });
         Assert.IsNotNull(result.Css);
