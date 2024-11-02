@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
@@ -20,13 +21,61 @@ public class TestScss
     {
         // Make sure the CurrentDirectory is the same as this assembly (JetBrain Resharper Unittest bug in 10.x???)
         Environment.CurrentDirectory = Path.GetDirectoryName(typeof(TestScss).Assembly.Location);
+
+        // Custom loading of native library
+        //string arch;
+        //switch (System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture)
+        //{
+        //    case Architecture.X64:
+        //        arch = "x64";
+        //        break;
+        //    case Architecture.X86:
+        //        arch = "x86";
+        //        break;
+        //    case Architecture.Arm:
+        //        arch = "arm";
+        //        break;
+        //    case Architecture.Arm64:
+        //        arch = "arm64";
+        //        break;
+        //    default:
+        //        throw new ArgumentOutOfRangeException();
+        //}
+
+        var test = RuntimeInformation.RuntimeIdentifier;
+
+        string rid = RuntimeInformation.RuntimeIdentifier;
+        string sharedObjectPostExtension;
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            //rid = $"win-{arch}";
+            sharedObjectPostExtension = "dll";
+        }
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        {
+            //rid = $"linux-{arch}";
+            sharedObjectPostExtension = "so";
+        }
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+        {
+            //rid = $"osx-{arch}";
+            sharedObjectPostExtension = "dylib";
+        }
+        else
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        var fullPath = Path.Combine(AppContext.BaseDirectory, "runtimes", rid, "native", $"libsass.{sharedObjectPostExtension}");
+        var libraryPointer = NativeLibrary.Load(fullPath);
+        Assert.AreNotEqual(nint.Zero, libraryPointer, $"Unable to load library {fullPath}");
     }
 
     [TestMethod]
     public void TestVersion()
     {
         var version = Scss.Version;
-        StringAssert.StartsWith("3.6.4", version);
+        StringAssert.StartsWith("3.6.6", version);
     }
 
     [TestMethod]

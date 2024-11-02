@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46667"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="SharpScss.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.6204616"
+     inkscape:cx="396.80053"
+     inkscape:cy="166.31064"
+     inkscape:window-width="3840"
+     inkscape:window-height="2054"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:141.111px;line-height:9.18691px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code Bold';letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke-width:0.264583"
+       x="21.552502"
+       y="116.25288"
+       id="text3"
+       inkscape:label="#"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         style="fill:#808080;fill-opacity:1;stroke-width:0.264583"
+         x="21.552502"
+         y="116.25288">#</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:70.5556px;line-height:4.59346px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code Bold';letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="1.3062122"
+       y="86.373283"
+       id="text9"><tspan
+         sodipodi:role="line"
+         id="tspan9"
+         style="stroke-width:0.264583"
+         x="1.3062122"
+         y="86.373283"><tspan
+           style="fill:#d40000"
+           id="tspan10">c</tspan><tspan
+           style="fill:#55d400"
+           id="tspan11">s</tspan><tspan
+           style="fill:#2a7fff"
+           id="tspan12">s</tspan></tspan></text>
+  </g>
+</svg>

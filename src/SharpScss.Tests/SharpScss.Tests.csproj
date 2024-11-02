@@ -20,7 +20,13 @@
   <ItemGroup>
     <ProjectReference Include="..\SharpScss\SharpScss.csproj" />
   </ItemGroup>
-  
-  <Import Project="..\SharpScss\build\net20-35-40\SharpScss.targets" />
+
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)..\SharpScss\runtimes\**\**\*.*">
+      <Link>runtimes\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Visible>False</Visible>
+    </Content>
+  </ItemGroup>
 
  </Project>
