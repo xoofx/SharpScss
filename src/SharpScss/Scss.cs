@@ -16,8 +16,8 @@ public static class Scss
 {
     // NOTE: It is important to keep allocated delegate importer function, so that it will not be garbage collected
     private static readonly LibSass.Sass_Importer_Fn ScssImporterLock;
-    private static string version;
-    private static string languageVersion;
+    private static string? version;
+    private static string? languageVersion;
     private static readonly ScssOptions DefaultOptions = new ScssOptions();
         
     static Scss()
@@ -31,7 +31,7 @@ public static class Scss
     /// </summary>
     public static string Version
     {
-        get { return version = version ?? LibSass.libsass_version(); }
+        get { return version ??= LibSass.libsass_version(); }
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ public static class Scss
     /// <param name="options">The options.</param>
     /// <returns>The result of the conversion</returns>
     /// <exception cref="System.ArgumentNullException">if scss is null</exception>
-    public static ScssResult ConvertToCss(string scss, ScssOptions options = null)
+    public static ScssResult ConvertToCss(string scss, ScssOptions? options = null)
     {
         if (scss == null) throw new ArgumentNullException(nameof(scss));
         return FromCore(scss, false, options);
@@ -62,7 +62,7 @@ public static class Scss
     /// <param name="options">The options.</param>
     /// <returns>The result of the conversion</returns>
     /// <exception cref="System.ArgumentNullException">if scss is null</exception>
-    public static ScssResult ConvertFileToCss(string scssFile, ScssOptions options = null)
+    public static ScssResult ConvertFileToCss(string scssFile, ScssOptions? options = null)
     {
         if (scssFile == null) throw new ArgumentNullException(nameof(scssFile));
         return FromCore(scssFile, true, options);
@@ -75,7 +75,7 @@ public static class Scss
     /// <param name="fromFile">if set to <c>true</c> <paramref name="fromStringOrFile"/> is a scss file; otherwise it is a scss content.</param>
     /// <param name="options">The options.</param>
     /// <returns>The result of the conversion</returns>
-    private static ScssResult FromCore(string fromStringOrFile, bool fromFile, ScssOptions options = null)
+    private static ScssResult FromCore(string fromStringOrFile, bool fromFile, ScssOptions? options = null)
     {
         var compiler = new LibSass.Sass_Compiler();
         GCHandle? tryImportHandle = null;
@@ -87,18 +87,15 @@ public static class Scss
             {
                 var fileContext = LibSass.sass_make_file_context(fromStringOrFile);
                 context = fileContext;
-                if (options.InputFile == null)
-                {
-                    options.InputFile = fromStringOrFile;
-                }
-                tryImportHandle = MarshalOptions(fileContext, options);
+                var inputFile = options.InputFile ?? fromStringOrFile;
+                tryImportHandle = MarshalOptions(fileContext, options, inputFile);
                 compiler = LibSass.sass_make_file_compiler(fileContext);
             }
             else
             {
                 var dataContext = LibSass.sass_make_data_context(fromStringOrFile);
                 context = dataContext;
-                tryImportHandle = MarshalOptions(dataContext, options);
+                tryImportHandle = MarshalOptions(dataContext, options, options.InputFile);
                 compiler = LibSass.sass_make_data_compiler(dataContext);
             }
 
@@ -112,8 +109,8 @@ public static class Scss
             var css = LibSass.sass_context_get_output_string(context);
 
             // Gets the map if it was enabled
-            string map = null;
-            if (options != null && options.GenerateSourceMap)
+            string? map = null;
+            if (options.GenerateSourceMap)
             {
                 map = LibSass.sass_context_get_source_map_string(context);
             }
@@ -154,20 +151,18 @@ public static class Scss
         }
     }
 
-    private static unsafe List<string> GetIncludedFiles(LibSass.Sass_Context context)
+    private static unsafe List<string>? GetIncludedFiles(LibSass.Sass_Context context)
     {
         var filesCount = (int)LibSass.sass_context_get_included_files_size(context);
         var files = (LibSass.StringUtf8*)LibSass.sass_context_get_included_files(context);
-        List<string> list = null;
+        List<string>? list = null;
         for(int i = 0; i < filesCount; i++)
         { 
             if (!files->IsEmpty)
             {
-                if (list == null)
-                {
-                    list = new List<string>();
-                }
-                list.Add(*files);
+                list ??= new List<string>();
+                var fileAsString = (string)(*files)!;
+                list.Add(fileAsString);
             }
             files++;
         }
@@ -189,7 +184,7 @@ public static class Scss
         }
     }
 
-    private static GCHandle? MarshalOptions(LibSass.Sass_Context context, ScssOptions options)
+    private static GCHandle? MarshalOptions(LibSass.Sass_Context context, ScssOptions options, string? inputFile)
     {
         var nativeOptions = LibSass.sass_context_get_options(context);
 
@@ -227,24 +222,17 @@ public static class Scss
         {
             LibSass.sass_option_set_linefeed(nativeOptions, options.Linefeed);
         }
-        if (options.InputFile != null)
+        if (inputFile != null)
         {
-            var inputFile = GetRootedPath(options.InputFile);
+            inputFile = GetRootedPath(inputFile);
             LibSass.sass_option_set_input_path(nativeOptions, inputFile);
         }
-        string outputFile = null;
-        if (options.OutputFile != null)
+        string? outputFile = options.OutputFile;
+        if (outputFile != null)
         {
-            outputFile = GetRootedPath(options.OutputFile);
+            outputFile = GetRootedPath(outputFile);
             LibSass.sass_option_set_output_path(nativeOptions, outputFile);
         }
-        //if (options.PluginPaths.Count > 0)
-        //{
-        //    foreach (var path in options.PluginPaths)
-        //    {
-        //        LibSass.sass_option_push_plugin_path(nativeOptions, path);
-        //    }
-        //}
         if (options.IncludePaths.Count > 0)
         {
             foreach (var path in options.IncludePaths)
@@ -256,11 +244,6 @@ public static class Scss
         if (options.GenerateSourceMap)
         {
             var sourceMapFile = GetRootedPath(options.SourceMapFile ?? (outputFile ?? "result.css") + ".map");
-            if (options.SourceMapFile == null)
-            {
-                options.SourceMapFile = sourceMapFile;
-            }
-
             LibSass.sass_option_set_source_map_file(nativeOptions, sourceMapFile);
         }
         if (options.SourceMapRoot != null)
@@ -284,19 +267,19 @@ public static class Scss
         string previousPath = LibSass.sass_import_get_abs_path(previous);
 
         var cookieHandle = GCHandle.FromIntPtr(cookie);
-        var tryImport = (ScssOptions.TryImportDelegate)cookieHandle.Target;
+        var tryImport = (ScssOptions.TryImportDelegate?)cookieHandle.Target;
 
         var file = (string)currentPath;
         var importList = LibSass.sass_make_import_list(1);
         uint line = 0;
         uint column = 0;
-        string errorMessage = null;
+        string? errorMessage = null;
         if (tryImport != null)
         {
             try
             {
                 string scss;
-                string map;
+                string? map;
                 if (tryImport(ref file, previousPath, out scss, out map))
                 {
                     var entry = LibSass.sass_make_import(currentPath, file, scss, map ?? "");

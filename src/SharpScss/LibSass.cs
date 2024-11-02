@@ -88,7 +88,7 @@ internal static partial class LibSass
 
         public bool IsEmpty => pointer == IntPtr.Zero;
 
-        public static implicit operator string(StringUtf8 stringUtf8)
+        public static implicit operator string?(StringUtf8 stringUtf8)
         {
             if (stringUtf8.pointer != IntPtr.Zero)
             {
@@ -97,7 +97,7 @@ internal static partial class LibSass
             return null;
         }
 
-        public static unsafe implicit operator StringUtf8(string text)
+        public static unsafe implicit operator StringUtf8(string? text)
         {
             if (text == null)
             {
@@ -138,7 +138,7 @@ internal static partial class LibSass
     internal abstract class SassAllocator
     {
         [ThreadStatic]
-        private static List<IntPtr> PointersToFree;
+        private static List<IntPtr>? PointersToFree;
 
         public static void FreeNative()
         {

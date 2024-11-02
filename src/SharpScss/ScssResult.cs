@@ -17,7 +17,7 @@ public struct ScssResult
     /// <param name="css">The Css.</param>
     /// <param name="sourceMap">The source SourceMap.</param>
     /// <param name="includedFiles">The included files.</param>
-    public ScssResult(string css, string sourceMap, List<string> includedFiles)
+    public ScssResult(string css, string? sourceMap, List<string>? includedFiles)
     {
         Css = css;
         SourceMap = sourceMap;
@@ -32,10 +32,10 @@ public struct ScssResult
     /// <summary>
     /// Gets the source map (may be null if <see cref="ScssOptions.GenerateSourceMap"/> was <c>false</c>.
     /// </summary>
-    public string SourceMap { get; }
+    public string? SourceMap { get; }
 
     /// <summary>
     /// Gets the included files used to generate this result when converting the input scss content.
     /// </summary>
-    public List<string> IncludedFiles { get; }
+    public List<string>? IncludedFiles { get; }
 }

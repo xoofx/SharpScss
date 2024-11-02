@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 using System;
 
+#pragma warning disable CS8981
+
 namespace SharpScss
 {
     using System.Runtime.InteropServices;

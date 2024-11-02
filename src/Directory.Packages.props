@@ -5,8 +5,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="MinVer" Version="5.0.0" />
-    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0"/>
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
     <PackageVersion Include="MSTest" Version="3.5.0" />
     <PackageVersion Include="CppAst.CodeGen" Version="0.5.0-alpha-001" />
+    <PackageVersion Include="PolySharp" Version="1.14.1" />
   </ItemGroup>
 </Project>
