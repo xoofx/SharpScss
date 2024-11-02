@@ -299,7 +299,7 @@ public static class Scss
                 string map;
                 if (tryImport(ref file, previousPath, out scss, out map))
                 {
-                    var entry = LibSass.sass_make_import_entry(file, scss, map);
+                    var entry = LibSass.sass_make_import(currentPath, file, scss, map ?? "");
                     *(LibSass.Sass_Import_Entry*)importList.Value = entry;
                     return importList;
                 }
@@ -321,7 +321,7 @@ public static class Scss
             errorMessage = $"Unable to find include file for @import \"{file}\" with dynamic import";
         }
         {
-            var entry = LibSass.sass_make_import_entry(file, null, null);
+            var entry = LibSass.sass_make_import(file, "","", "");
             *(LibSass.Sass_Import_Entry*)importList.Value = entry;
 
             LibSass.sass_import_set_error(entry, errorMessage, line, column);
