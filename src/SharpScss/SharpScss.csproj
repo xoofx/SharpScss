@@ -1,26 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IsPackable>true</IsPackable>
+
+    <LangVersion>11.0</LangVersion>
+
+    <!-- Enable AOT analyzers -->
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <IsAotCompatible>true</IsAotCompatible>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <Description>A P/Invoke .NET wrapper around libsass to convert SCSS to CSS for .NET</Description>
     <Copyright>Alexandre Mutel</Copyright>
-    <AssemblyTitle>SharpScss</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>2.0.0</VersionPrefix>
     <Authors>Alexandre Mutel</Authors>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <AssemblyName>SharpScss</AssemblyName>
-    <PackageId>SharpScss</PackageId>
     <PackageTags>libsass;SCSS;SASS;CSS</PackageTags>
-    <PackageReleaseNotes>https://github.com/xoofx/SharpScss/blob/master/changelog.md</PackageReleaseNotes>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageIcon>SharpScss.png</PackageIcon>
     <PackageProjectUrl>https://github.com/xoofx/SharpScss</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/xoofx/SharpScss/blob/master/license.txt</PackageLicenseUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>git://github.com/xoofx/SharpScss</RepositoryUrl>
+    <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
     <!--Add support for sourcelink-->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>    
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,6 +33,11 @@
       <PackagePath>%(Identity)</PackagePath>
       <Pack>true</Pack>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)../../img/SharpScss.png" Pack="true" PackagePath="/" />
+    <None Include="$(MSBuildThisFileDirectory)../../readme.md" Pack="true" PackagePath="/" />
   </ItemGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -38,7 +48,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MinVer">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+
     <!--Add support for sourcelink-->
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.*" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 </Project>

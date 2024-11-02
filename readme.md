@@ -1,8 +1,10 @@
 # SharpScss [![Build Status](https://github.com/xoofx/SharpScss/workflows/ci/badge.svg?branch=master)](https://github.com/xoofx/SharpScss/actions)  [![NuGet](https://img.shields.io/nuget/v/SharpScss.svg)](https://www.nuget.org/packages/SharpScss/)
 
+<img align="right" width="160px" height="160px" src="https://raw.githubusercontent.com/xoofx/SharpScss/main/img/SharpScss.png">
+
 SharpScss is a P/Invoke .NET wrapper around [libsass](https://github.com/sass/libsass) to convert SCSS to CSS.
 
-> Based on the version of `libsass 3.6.4`
+> Based on the version of `libsass 3.6.6`
 
 ## Features
 
@@ -12,7 +14,19 @@ SharpScss is a P/Invoke .NET wrapper around [libsass](https://github.com/sass/li
 - Supports for source maps
 - Supports for `libsass` user custom importer callback in `ScssOptions.TryImport`
 - Supports for `.NET Standard 2.0+`
-- Supports `Windows x86`, `Windows x64`, `linux-x64` and `osx-x64`
+- Supports the following platforms:
+    - `win-x86`
+    - `win-x64`
+    - `win-arm`
+    - `win-arm64`
+    - `linux-x64`
+    - `linux-arm`
+    - `linux-arm64`
+    - `linux-musl-x64`
+    - `linux-musl-arm`
+    - `linux-musl-arm64`
+    - `osx-x64`
+    - `osx-arm64`
 
 For older .NET2.0, .NET3.5, .NET4.x+ and `netstandard1.3`, you need to download the `1.4.0` version.
 
@@ -77,18 +91,26 @@ SharpScss depends on the native runtime `libsass`. This runtime is compiled for 
 
 - `win-x86`
 - `win-x64`
+- `win-arm`
+- `win-arm64`
 - `linux-x64`
+- `linux-arm`
+- `linux-arm64`
+- `linux-musl-x64`
+- `linux-musl-arm`
+- `linux-musl-arm64`
 - `osx-x64`
+- `osx-arm64`
 
-On .NET Core (`netcoreapp`), the runtime is selected based on the [Runtime Identifier - RID](https://docs.microsoft.com/en-us/dotnet/articles/core/rid-catalog) of your project.
+On .NET Core (`net8.0`), the runtime is selected based on the [Runtime Identifier - RID](https://docs.microsoft.com/en-us/dotnet/articles/core/rid-catalog) of your project.
 
-- You can add to your csproj the specific targeting runtimes your `netcoreapp` with `<RuntimeIdentifiers>win-x86;linux-x64</RuntimeIdentifiers>` or `<RuntimeIdentifier>` if you have only one runtime to target (See [Additions to the csproj format for .NET Core](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/csproj))
+- You can add to your csproj the specific targeting runtimes your `net8.0` with `<RuntimeIdentifiers>win-x86;linux-x64</RuntimeIdentifiers>` or `<RuntimeIdentifier>` if you have only one runtime to target (See [Additions to the csproj format for .NET Core](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/csproj))
 
 ## Build
 
 Currently, the compiled version of libsass shipped with SharpScss is a custom build from the fork [xoofx/libsass](https://github.com/xoofx/libsass)
 
-This fork is mainly allowing to compile libsass without the MSVC C/C++ Runtime on Windows.
+This fork is mainly allowing to compile libsass without the MSVC C/C++ Runtime on Windows and provide a GitHub CI action to compile all different platforms.
 
 ## License
 
